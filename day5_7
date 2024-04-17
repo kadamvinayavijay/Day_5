@@ -1,0 +1,46 @@
+class Queue:
+    def __init__(self):
+        self.items = []
+
+    def insert(self, data):
+        self.items.append(data)
+
+    def delete(self):
+        if not self.is_empty():
+            return self.items.pop(0)
+
+    def display(self):
+        if not self.is_empty():
+            print("Queue: ", end="")
+            for item in self.items:
+                print(item, end=" ")
+            print()
+        else:
+            print("Queue is empty")
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def size(self):
+        return len(self.items)
+
+if __name__ == "__main__":
+    queue = Queue()
+    print("Is the queue empty? ", queue.is_empty())
+    print("Queue size: ", queue.size())
+    queue.insert(1)
+    queue.insert(2)
+    queue.insert(3)
+    queue.insert(4)
+    queue.display()
+    print("Queue size: ", queue.size())
+    print("Deleted element: ", queue.delete())
+    queue.display()
+
+
+          Is the queue empty?  True
+Queue size:  0
+Queue: 1 2 3 4 
+Queue size:  4
+Deleted element:  1
+Queue: 2 3 4 
