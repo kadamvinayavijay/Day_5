@@ -1,0 +1,88 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def append(self, data):
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+        else:
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node
+
+    def find_smallest(self):
+        if not self.head:
+            return None
+        current = self.head
+        smallest = current.data
+        while current:
+            if current.data < smallest:
+                smallest = current.data
+            current = current.next
+        return smallest
+
+    def insert_unique(self, data):
+        if not self.head:
+            self.append(data)
+            return
+        new_node = Node(data)
+        if self.head.data == data:
+            return
+        current = self.head
+        while current.next:
+            if current.data == data:
+                return
+            current = current.next
+        if current.data == data:
+            return
+        current.next = new_node
+
+    def reverse(self):
+        if not self.head or not self.head.next:
+            return
+        prev = None
+        current = self.head
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        self.head = prev
+
+    def display(self):
+        if not self.head:
+            return
+        current = self.head
+        while current:
+            print(current.data, end=" -> ")
+            current = current.next
+        print("None")
+
+if __name__ == "__main__":
+    linked_list = LinkedList()
+    linked_list.append(1)
+    linked_list.append(5)
+    linked_list.append(3)
+    linked_list.append(2)
+    linked_list.append(4)
+    linked_list.display()
+    print("Smallest element: ", linked_list.find_smallest())
+    linked_list.insert_unique(6)
+    linked_list.insert_unique(3)
+    linked_list.display()
+    linked_list.reverse()
+    linked_list.display()
+
+
+
+ 1 -> 5 -> 3 -> 2 -> 4 -> None
+Smallest element:  1
+1 -> 5 -> 3 -> 2 -> 4 -> 6 -> None
+6 -> 4 -> 2 -> 3 -> 5 -> 1 -> None
