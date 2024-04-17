@@ -1,0 +1,60 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, data):
+        self.items.append(data)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.items.pop()
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def size(self):
+        return len(self.items)
+
+def precedence(op):
+    if op == '+' or op == '-':
+        return 1
+    elif op == '*' or op == '/':
+        return 2
+    elif op == '^':
+        return 3
+    else:
+        return -1
+
+def infix_to_postfix(infix):
+    stack = Stack()
+    postfix = ''
+    i = 0
+    while i < len(infix):
+        if infix[i] >= 'A' and infix[i] <= 'Z' or infix[i] >= 'a' and infix[i] <= 'z':
+            postfix += infix[i]
+            i += 1
+        elif infix[i] == '(':
+            stack.push(infix[i])
+            i += 1
+        elif infix[i] == ')':
+            top = stack.pop()
+            while top != '(':
+                postfix += top
+                top = stack.pop()
+            i += 1
+        else:
+            while (not stack.is_empty()) and (precedence(stack.items[-1]) >= precedence(infix[i])):
+                postfix += stack.pop()
+            stack.push(infix[i])
+            i += 1
+    while not stack.is_empty():
+        postfix += stack.pop()
+    return postfix
+
+if __name__ == "__main__":
+    infix1 = "A/B^C+D*E-F*G"
+    infix2 = "(B^2-4*A*C)^(1/2)(100)"
+    print("Postfix of", infix1, "is: ", infix_to_postfix(infix1))
+    print("Postfix of", infix2, "is: ", infix_to_postfix(infix2))
+
+
