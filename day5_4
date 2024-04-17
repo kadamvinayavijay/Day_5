@@ -1,1 +1,23 @@
+def insertion_sort(arr):
+    n = len(arr)
+    for i in range(1, n):
+        key = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > key:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = key
 
+# Initialize the unsorted list
+arr = [64, 25, 12, 22, 11]
+
+# Call the insertion sort function
+insertion_sort(arr)
+
+# Display the sorted list
+print("Sorted list is:")
+print(arr)
+
+
+Sorted list is:
+[11, 12, 22, 25, 64]
