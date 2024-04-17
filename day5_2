@@ -1,0 +1,51 @@
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+
+    # Continue searching while the range of elements to consider is not empty
+    while low <= high:
+        mid = (low + high) // 2
+        mid_elem = arr[mid]
+
+        if mid_elem == target:
+            return mid
+        elif mid_elem < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+    return -1
+
+# Get the number of inputs from the user
+n = int(input("Enter the number of elements in the list: "))
+
+# Store the inputs individually in a list
+arr = []
+for i in range(n):
+    arr.append(int(input(f"Enter element {i+1}: ")))
+
+# Sort the list in order to start the search from the middle of the list
+arr.sort()
+
+# Enter the item to be searched (match_item)
+match_item = int(input("Enter the item to be searched: "))
+
+# Call the binary search function
+result = binary_search(arr, match_item)
+
+# Print the result along with the position of the element
+if result != -1:
+    print(f"Item found at position {result+1}")
+else:
+    print("Item not found in the list")
+
+
+
+      Enter the number of elements in the list: 5
+Enter element 1: 3
+Enter element 2: 5
+Enter element 3: 7
+Enter element 4: 9
+Enter element 5: 11
+Enter the item to be searched: 3
+Item found at position 1
