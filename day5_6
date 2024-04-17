@@ -1,0 +1,48 @@
+class Stack:
+    def __init__(self):
+        self.items = []
+
+    def push(self, data):
+        self.items.append(data)
+
+    def pop(self):
+        if not self.is_empty():
+            return self.items.pop()
+
+    def display(self):
+        if not self.is_empty():
+            print("Stack: ", end="")
+            for item in self.items[::-1]:
+                print(item, end=" ")
+            print()
+        else:
+            print("Stack is empty")
+
+    def is_empty(self):
+        return len(self.items) == 0
+
+    def size(self):
+        return len(self.items)
+
+if __name__ == "__main__":
+    stack = Stack()
+    print("Is the stack empty? ", stack.is_empty())
+    print("Stack size: ", stack.size())
+    stack.push(1)
+    stack.push(2)
+    stack.push(3)
+    stack.push(4)
+    stack.display()
+    print("Stack size: ", stack.size())
+    print("Is the stack empty? ", stack.is_empty())
+    print("Popped element: ", stack.pop())
+    stack.display()
+
+
+          Is the stack empty?  True
+Stack size:  0
+Stack: 4 3 2 1 
+Stack size:  4
+Is the stack empty?  False
+Popped element:  4
+Stack: 3 2 1 
